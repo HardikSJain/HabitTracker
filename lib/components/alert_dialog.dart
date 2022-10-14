@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
-class EnterNewHabitDialog extends StatelessWidget {
+class MyDialog extends StatelessWidget {
   final controller;
+  final String hintText;
   final VoidCallback onSave;
   final VoidCallback onCancel;
 
-  const EnterNewHabitDialog({
+  const MyDialog({
     super.key,
     required this.controller,
+    required this.hintText,
     required this.onSave,
     required this.onCancel,
   });
@@ -19,11 +21,13 @@ class EnterNewHabitDialog extends StatelessWidget {
       content: TextField(
         controller: controller,
         style: const TextStyle(color: Colors.white),
-        decoration: const InputDecoration(
-          enabledBorder: OutlineInputBorder(
+        decoration: InputDecoration(
+          hintText: hintText,
+          hintStyle: TextStyle(color: Colors.grey[400]),
+          enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.white),
           ),
-          focusedBorder: OutlineInputBorder(
+          focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: Colors.white),
           ),
         ),

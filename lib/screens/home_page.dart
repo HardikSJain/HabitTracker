@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:habbit_tracker/components/alert_dialog.dart';
 import 'package:habbit_tracker/components/fab.dart';
 import 'package:habbit_tracker/components/habit_tile.dart';
-import 'package:habbit_tracker/components/new_habit.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -31,10 +31,11 @@ class _HomePageState extends State<HomePage> {
     showDialog(
       context: context,
       builder: (context) {
-        return EnterNewHabitDialog(
+        return MyDialog(
           controller: _newHabitNameController,
+          hintText: "Enter habit name..",
           onSave: saveNewHabit,
-          onCancel: cancelNewHabit,
+          onCancel: cancelDialogBox,
         );
       },
     );
@@ -48,8 +49,36 @@ class _HomePageState extends State<HomePage> {
     Navigator.pop(context);
   }
 
-  void cancelNewHabit() {
+  void cancelDialogBox() {
     _newHabitNameController.clear();
+    Navigator.pop(context);
+  }
+
+  void openHabitSettings(int index) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return MyDialog(
+            controller: _newHabitNameController,
+            hintText: todaysHabits[index][0],
+            onSave: () => saveExistingHabit(index),
+            onCancel: cancelDialogBox,
+          );
+        });
+  }
+
+  void saveExistingHabit(int index) {
+    setState(() {
+      todaysHabits[index][0] = _newHabitNameController.text;
+    });
+    _newHabitNameController.clear();
+    Navigator.pop(context);
+  }
+
+  void deleteHabit(int index) {
+    setState(() {
+      todaysHabits.removeAt(index);
+    });
     Navigator.pop(context);
   }
 
@@ -67,6 +96,8 @@ class _HomePageState extends State<HomePage> {
             habitName: todaysHabits[index][0],
             habitCompleted: todaysHabits[index][1],
             onCheckboxChanged: (value) => checkBoxTapped(value, index),
+            settingsTapped: (context) => openHabitSettings(index),
+            deleteTapped: (context) => deleteHabit(index),
           );
         },
       ),
