@@ -9,11 +9,12 @@ App that helps you build positive habits, measure progress and achieve your goal
 - Edit habits
 - Delete habits
 - Local storage
+- Heat map to track progress
 
 
 ## ✅ To Do
 
-- [ ] HeatMap
+- [x] HeatMap
 - [ ] Streaks
 - [ ] Longest streaks
 - [ ] Splash screen
