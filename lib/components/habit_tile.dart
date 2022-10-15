@@ -52,6 +52,8 @@ class HabitTile extends StatelessWidget {
                 onChanged: onCheckboxChanged,
               ),
               Text(habitName),
+              const Spacer(),
+              const Icon(Icons.chevron_right),
             ],
           ),
         ),

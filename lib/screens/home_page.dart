@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:habbit_tracker/components/alert_dialog.dart';
 import 'package:habbit_tracker/components/fab.dart';
 import 'package:habbit_tracker/components/habit_tile.dart';
+import 'package:habbit_tracker/components/monthly_summary.dart';
 import 'package:habbit_tracker/data/habit_database.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -104,17 +105,27 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: MyFloatingActionButton(
         onPressed: createNewHabit,
       ),
-      body: ListView.builder(
-        itemCount: db.todaysHabits.length,
-        itemBuilder: (context, index) {
-          return HabitTile(
-            habitName: db.todaysHabits[index][0],
-            habitCompleted: db.todaysHabits[index][1],
-            onCheckboxChanged: (value) => checkBoxTapped(value, index),
-            settingsTapped: (context) => openHabitSettings(index),
-            deleteTapped: (context) => deleteHabit(index),
-          );
-        },
+      body: ListView(
+        children: [
+          MonthlySummary(
+            datasets: db.heatMapDataSet,
+            startDate: _myBox.get("START_DATE"),
+          ),
+          ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: db.todaysHabits.length,
+            itemBuilder: (context, index) {
+              return HabitTile(
+                habitName: db.todaysHabits[index][0],
+                habitCompleted: db.todaysHabits[index][1],
+                onCheckboxChanged: (value) => checkBoxTapped(value, index),
+                settingsTapped: (context) => openHabitSettings(index),
+                deleteTapped: (context) => deleteHabit(index),
+              );
+            },
+          ),
+        ],
       ),
     );
   }
