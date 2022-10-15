@@ -1,4 +1,4 @@
-import 'package:habbit_tracker/datetime/date_time.dart';
+import 'package:HabitTracker/datetime/date_time.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 final _myBox = Hive.box("Habit_Database");

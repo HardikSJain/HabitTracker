@@ -1,4 +1,4 @@
-# Habbit_Tracker
+# HabitTracker
 
 App that helps you build positive habits, measure progress and achieve your goals
 

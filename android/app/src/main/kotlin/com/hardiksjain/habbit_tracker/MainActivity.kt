@@ -1,4 +1,4 @@
-package com.hardiksjain.habbit_tracker
+package com.hardiksjain.HabitTracker
 
 import io.flutter.embedding.android.FlutterActivity
 
